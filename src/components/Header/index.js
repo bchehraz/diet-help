@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
 
+import './index.css';
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -8,12 +10,18 @@ class Header extends Component {
     this.renderLink = this.renderLink.bind(this);
   }
 
-  renderLink(title) {
+  onMouseDown() {
+
+  }
+
+  renderLink(title, index) {
     return (
       <Link
         to="/"
         style={styles.Link}
-        key={title}
+        key={index}
+        onMouseOver={() => console.log("this works")}
+        onMouseDown={() => console.log("and this too")}
       >
         <li style={styles.li}>
           <h1 style={{ margin: 0 }}>{title}</h1>
@@ -46,8 +54,8 @@ class Header extends Component {
           }}
         >
           <ul style={styles.ul}>
-            {navTitles.map((title) => {
-              return this.renderLink(title);
+            {navTitles.map((title, index) => {
+              return this.renderLink(title, index);
             })}
           </ul>
         </div>
@@ -66,6 +74,9 @@ const styles = {
     border: '1px solid black',
     borderRadius: '10px',
     padding: '10px 0',
+  },
+  liHover: {
+
   },
   Link: {
     color: 'white',
