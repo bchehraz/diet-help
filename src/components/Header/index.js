@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
+//import { Element , Events, animateScroll as scroll, scrollSpy, scroller, Link } from 'react-scroll'
 
 import './index.css';
 
@@ -10,18 +11,12 @@ class Header extends Component {
     this.renderLink = this.renderLink.bind(this);
   }
 
-  onMouseDown() {
-
-  }
-
   renderLink(title, index) {
     return (
       <Link
-        to="/"
+        to="#hello"
         style={styles.Link}
         key={index}
-        onMouseOver={() => console.log("this works")}
-        onMouseDown={() => console.log("and this too")}
       >
         <li style={styles.li}>
           <h1 style={{ margin: 0 }}>{title}</h1>
@@ -43,14 +38,14 @@ class Header extends Component {
       <div
         style={{
           background: 'rebeccapurple',
-          marginBottom: '1.45rem',
+          padding: 0,
         }}
       >
         <div
           style={{
             margin: '0 auto',
             maxWidth: 960,
-            padding: '1.45rem 1.0875rem',
+            padding: '0.5rem 1.0875rem',
           }}
         >
           <ul style={styles.ul}>
@@ -69,6 +64,7 @@ const styles = {
     listStyle: 'none',
     display: 'flex',
     flexDirection: 'row',
+    margin: 0,
   },
   li: {
     border: '1px solid black',
