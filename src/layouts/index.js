@@ -17,16 +17,17 @@ const Layout = ({ children, data }) => (
     />
 
     <Header siteTitle={data.site.siteMetadata.title} />
-    
-    <Parallax pages={2} style={{ height: '100vh', backgroundColor: 'black', }}>
-      <div
-        style={{
-          margin: '0 auto',
-        }}
-      >
-        {children()}
-      </div>
-    </Parallax>
+
+    <div
+      style={{
+        margin: '0 auto',
+        overflow: 'hidden',
+        zIndex: 1,
+        width: '100vw',
+      }}
+    >
+      {children()}
+    </div>
   </div>
 )
 
