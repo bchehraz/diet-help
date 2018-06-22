@@ -14,10 +14,10 @@ class IndexPage extends Component {
       lastScrollPos: 0
     };
 
-    this.handleScroll = this.handleScroll.bind(this);
+    //this.handleScroll = this.handleScroll.bind(this);
   }
 
-  componentDidMount() {
+  /*componentDidMount() {
     //window.addEventListener('scroll', (e)=>console.log(e.target), true);
     window.addEventListener('scroll', this.handleScroll, true)
   }
@@ -38,7 +38,7 @@ class IndexPage extends Component {
         lastScrollPos:event.target.scrollTop
       });
     }
-  }
+  }*/
 
   renderLayer = (offset, speed, content, style={ height: '25vh' }) => {
     return (
@@ -63,7 +63,8 @@ class IndexPage extends Component {
     const { data } = this.props;
 
     return (
-        <div style={{ padding: 0, margin: 0, width: '100vw', textAlign: 'center' }} onScroll={this.handleScroll}>
+      <Parallax pages={2} style={styles.parallax}>
+        <div style={{ padding: 0, margin: 0, textAlign: 'center', overflow: 'hidden', }}>
           <div
             style={{
               height: '100vh'
@@ -113,6 +114,7 @@ class IndexPage extends Component {
             {this.renderLayer(0, 1, (<h1 style={styles.subtitle}>Hello World</h1>))}
           </div>
         </div>
+      </Parallax>
     )
   }
 }
@@ -129,6 +131,15 @@ const styles = {
     fontSize: '3em',
     fontSize: '5em',
     border: '1px solid black',
+  },
+  parallax: {
+    height: '100vh',
+    backgroundColor: 'black',
+    width: '100vw',
+    overflowY: 'scroll',
+    position: 'fixed',
+    top: 0, left: 0,
+    zIndex: 1,
   }
 }
 
