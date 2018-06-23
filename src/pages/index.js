@@ -19,11 +19,11 @@ class IndexPage extends Component {
 
   /*componentDidMount() {
     //window.addEventListener('scroll', (e)=>console.log(e.target), true);
-    window.addEventListener('scroll', this.handleScroll, true)
+    //window.addEventListener('scroll', this.handleScroll, true)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll)
+    //window.removeEventListener('scroll', this.handleScroll)
   }
 
   handleScroll(event) {
@@ -40,22 +40,23 @@ class IndexPage extends Component {
     }
   }*/
 
-  renderLayer = (offset, speed, content, style={ height: '25vh' }) => {
+  renderLayer = (offset, speed, name, content, containerStyle, styles={ height: '25vh' }) => {
+
     return (
-      <ParallaxLayer offset={offset} speed={speed}>
-        <div
-          style={{
-            ...style,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#ccc',
-          }}
-        >
-          {content}
-          <span id="hello">Hello, Scroller</span>
-        </div>
-      </ParallaxLayer>
+      <div name={name} id={name} style={containerStyle}>
+        <ParallaxLayer offset={offset} speed={speed}>
+          <div
+            style={{
+              ...styles,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            {content}
+          </div>
+        </ParallaxLayer>
+      </div>
     )
   }
 
@@ -63,58 +64,44 @@ class IndexPage extends Component {
     const { data } = this.props;
 
     return (
-      <Parallax pages={2} style={styles.parallax}>
-        <div style={{ padding: 0, margin: 0, textAlign: 'center', overflow: 'hidden', }}>
-          <div
-            style={{
-              height: '100vh'
-            }}
-          >
-            <BgImage image={data.bgImg} style={{ width: '100%', height: '100vh' }}/>
-            <ParallaxLayer offset={0} speed={0.5}>
-              <div
-                style={{
-                  height: '75vh',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <h1 style={{ color: '#fff', fontSize: '5em', }}>Main Title</h1>
-              </div>
-            </ParallaxLayer>
-          </div>
+      <div style={{ padding: 0, margin: 0, textAlign: 'center', overflow: 'hidden', }}>
 
-          <div
-            style={{
-              height: '50vh',
-              color: 'red',
-            }}
-          >
-            <ParallaxLayer offset={0} speed={1} style={{textAlign:'center'}}>
-              <div
-                style={{
-                  height: '25vh',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: '#ccc'
-                }}
-              >
-                <h1 style={styles.subtitle}>Introduction</h1>
-              </div>
-            </ParallaxLayer>
-          </div>
+          <BgImage image={data.bgImg} style={{ width: '100%', height: '100vh' }}/>
+          {
+            this.renderLayer(0, 0.5, "top", (
+              <h1 style={{ color: '#fff', fontSize: '5em', }}>
+                Main Title
+              </h1>
+            ),
+            styles.mainTitleContainer,
+            { height: '75vh' })
+          }
 
           <div
             style={{
               height: '50vh',
             }}
           >
-            {this.renderLayer(0, 1, (<h1 style={styles.subtitle}>Hello World</h1>))}
+            {
+              this.renderLayer(0, 1, "intro",
+              (<h1 style={styles.subtitle}>Introduction</h1>),
+              styles.subtitleContainer,
+              {
+                height: '25vh',
+                backgroundColor: '#ccc',
+              })
+            }
           </div>
+            {this.renderLayer(0, 1, "step1",
+              (<h1 style={styles.subtitle}>Step 1</h1>),
+            styles.subtitleContainer)}
+            {this.renderLayer(0, 1, "step2",
+              (<h1 style={styles.subtitle}>Step 2</h1>),
+            styles.subtitleContainer)}
+            {this.renderLayer(0, 1, "step3",
+              (<h1 style={styles.subtitle}>Step 3</h1>),
+            styles.subtitleContainer)}
         </div>
-      </Parallax>
     )
   }
 }
@@ -127,10 +114,9 @@ const styles = {
     fontSize: '5em',
   },
   subtitle: {
-    color: '#000',
+    color: '#fff',
     fontSize: '3em',
     fontSize: '5em',
-    border: '1px solid black',
   },
   parallax: {
     height: '100vh',
@@ -140,6 +126,12 @@ const styles = {
     position: 'fixed',
     top: 0, left: 0,
     zIndex: 1,
+  },
+  mainTitleContainer: {
+    height: '100vh',
+  },
+  subtitleContainer: {
+    height: '50vh',
   }
 }
 
