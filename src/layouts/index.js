@@ -18,21 +18,35 @@ const Layout = ({ children, data }) => (
 
     <Header siteTitle={data.site.siteMetadata.title} />
 
-    <div
-      style={{
-        margin: '0 auto',
-        overflow: 'hidden',
-        zIndex: 1,
-        width: '100vw',
-      }}
-    >
-      {children()}
-    </div>
+    <Parallax pages={2} style={styles.parallax}>
+      <div
+        style={{
+          margin: '0 auto',
+          overflow: 'hidden',
+          zIndex: 1,
+          width: '100vw',
+        }}
+      >
+        {children()}
+      </div>
+    </Parallax>
   </div>
 )
 
 Layout.propTypes = {
   children: PropTypes.func,
+}
+
+const styles = {
+  parallax: {
+    height: '100vh',
+    backgroundColor: 'black',
+    width: '100vw',
+    overflowY: 'scroll',
+    position: 'fixed',
+    top: 0, left: 0,
+    zIndex: 1,
+  },
 }
 
 export default Layout
