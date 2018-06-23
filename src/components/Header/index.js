@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Link from 'gatsby-link'
-//import { Element , Events, animateScroll as scroll, scrollSpy, scroller, Link } from 'react-scroll'
 
 import './index.css';
 
@@ -11,10 +10,10 @@ class Header extends Component {
     this.renderLink = this.renderLink.bind(this);
   }
 
-  renderLink(title, index) {
+  renderLink(link, title, index) {
     return (
       <Link
-        to="#hello"
+        to={"#hello"}
         style={styles.Link}
         key={index}
       >
@@ -55,7 +54,7 @@ class Header extends Component {
         >
           <ul style={styles.ul}>
             {navTitles.map((title, index) => {
-              return this.renderLink(title, index);
+              return this.renderLink(title.replace(/\s+/g, '').toLowerCase(), title, index);
             })}
           </ul>
         </div>
